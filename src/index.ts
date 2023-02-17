@@ -1,4 +1,4 @@
-import useStateDebounced from './useStateDebounced';
+import { useStateDebounced } from './useStateDebounced';
 
 export {
   useStateDebounced,
