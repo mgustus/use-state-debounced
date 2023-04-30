@@ -42,3 +42,5 @@ const [, debouncedTerm, setTerm] = useStateDebounced(700, 'pizza');
 
 <input onChange={e => setTerm(e.target.value)} />
 ```
+
+Related article [here](https://dev.to/mgustus/usestatedebounced-debounced-state-in-react-3nc0).
