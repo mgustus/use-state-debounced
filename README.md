@@ -1,7 +1,7 @@
 # use-state-debounced
 Simple yet powerful solution for debounced state in react. This hook is based on the standard react hook *useState*. **useStateDebounced** provides the same functionality as *useState*. It returns the same array of [value, setValue] plus debounced value. 
 
-## Installation
+## Install
 ```bash
 npm install use-state-debounced
 ```
