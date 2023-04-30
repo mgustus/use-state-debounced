@@ -1,6 +1,6 @@
 {
   "name": "use-state-debounced",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "useStateDebounced - React debounced state hook",
   "source": "src/index.ts",
   "main": "dist/index.js",

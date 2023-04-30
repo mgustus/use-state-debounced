@@ -1,5 +1,5 @@
 # use-state-debounced
-Simple yet powerful solution for debounced state in react. This hook is based on the standard react hook *useState*. **useStateDebounced** provides the same functionality as *useState*. It returns the same array of [value, setValue] plus debounced value. 
+Simple yet powerful solution for debounced state in react. This hook is based on the standard react hook *useState*. **useStateDebounced** provides a similar functionality. It returns the same array of [value, setValue] plus debounced value. 
 
 ## Install
 ```bash
@@ -41,7 +41,7 @@ export const RecipesList = () => {
 In the above example we use `<input>` as a [controlled](https://reactjs.org/docs/forms.html#controlled-components) component. For [uncontrolled](https://reactjs.org/docs/uncontrolled-components.html) components the first `term` parameter can be omitted.
 
 ```javascript
-const [, debouncedTerm, setTerm] = useStateDebounced(700, 'pizza');
+const [, debouncedTerm, setTerm] = useStateDebounced(700);
 
 <input onChange={e => setTerm(e.target.value)} />
 ```
