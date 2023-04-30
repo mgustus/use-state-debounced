@@ -1,7 +1,10 @@
 # use-state-debounced
 Simple yet powerful solution for debounced state in react. This hook is based on the standard react hook *useState*. **useStateDebounced** provides the same functionality as *useState*. It returns the same array of [value, setValue] plus debounced value. 
 
-
+## Installation
+```bash
+npm install use-state-debounced
+```
 ## Usage
 Usually we need debounced state to delay some costly operation execution until user interaction finished. In this example we wait for the user to finish typing in the search dialog before fetching a new list of recipes. So 700 ms after the last user's keystroke `debouncedTerm` is updated and the server query is executed. 
 
