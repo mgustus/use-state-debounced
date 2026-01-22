@@ -8,58 +8,55 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+
     permissions:
-      contents: write
+      contents: write  # Required for Trusted Publishing & GitHub release
+      id-token: write  # Required for OIDC
 
     steps:
+      # 1️⃣ Checkout repo
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Needed for tags
 
+      # 2️⃣ Setup Node.js and npm registry
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://registry.npmjs.org/
+          registry-url: https://registry.npmjs.org/  # npm registry
 
+      # 3️⃣ Install dependencies
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      # 4️⃣ Build the package
       - name: Build package
         run: yarn build
 
+      # 5️⃣ Configure git for version commits
       - name: Configure git
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
-      - name: Bump version (fallback to patch)
-        id: release
+      # 6️⃣ Bump version (force patch if no conventional commits)
+      - name: Bump version
         run: |
           set -e
-
           echo "Attempting conventional release..."
-          yarn release || true
+          yarn release || yarn release --release-as patch
 
-          if git describe --tags --exact-match >/dev/null 2>&1; then
-            echo "Conventional release created"
-          else
-            echo "No conventional commits found → forcing patch release"
-            yarn release --release-as patch
-          fi
-
-          echo "released=true" >> $GITHUB_OUTPUT
-
+      # 7️⃣ Push version bump + tag
       - name: Push version bump & tags
-        run: |
-          git push --follow-tags origin main
+        run: git push --follow-tags origin main
 
+      # 8️⃣ Publish to npm using Trusted Publishing
       - name: Publish to npm
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      # 9️⃣ Create GitHub Release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
