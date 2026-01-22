@@ -1,4 +1,7 @@
 {
+    "cSpell.words": [
+    "Gustus"
+  ],
   "prettier.requireConfig": true,
   "eslint.format.enable": true,
   "[typescript]": {
