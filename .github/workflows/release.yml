@@ -5,13 +5,13 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write  # Required for OIDC
+  contents: write  # Required for Trusted Publishing & GitHub release
+
 jobs:
   release:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write  # Required for Trusted Publishing & GitHub release
-      id-token: write  # Required for OIDC
 
     steps:
       # 1️⃣ Checkout repo
@@ -24,7 +24,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           registry-url: https://registry.npmjs.org/  # npm registry
 
       # 3️⃣ Install dependencies
