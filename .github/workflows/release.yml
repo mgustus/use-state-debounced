@@ -57,8 +57,6 @@ jobs:
       # 8️⃣ Publish to npm using Trusted Publishing (OIDC)
       - name: Publish to npm
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # 9️⃣ Create GitHub Release
       - name: Create GitHub Release
