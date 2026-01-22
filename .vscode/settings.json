@@ -1,7 +1,4 @@
 {
-  "cSpell.words": [
-    "microbundle"
-  ],
   "prettier.requireConfig": true,
   "eslint.format.enable": true,
   "[typescript]": {

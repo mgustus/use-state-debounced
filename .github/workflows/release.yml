@@ -1,0 +1,68 @@
+name: Release and Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build package
+        run: yarn build
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+      - name: Bump version (fallback to patch)
+        id: release
+        run: |
+          set -e
+
+          echo "Attempting conventional release..."
+          yarn release || true
+
+          if git describe --tags --exact-match >/dev/null 2>&1; then
+            echo "Conventional release created"
+          else
+            echo "No conventional commits found → forcing patch release"
+            yarn release --release-as patch
+          fi
+
+          echo "released=true" >> $GITHUB_OUTPUT
+
+      - name: Push version bump & tags
+        run: |
+          git push --follow-tags origin main
+
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
