@@ -1,7 +1,7 @@
 {
   "name": "use-state-debounced",
   "author": "Michael Gustus",
-  "version": "1.3.7",
+  "version": "1.4.0",
   "description": "useStateDebounced - React debounced state hook",
   "keywords": [
     "debounce",
