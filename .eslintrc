@@ -31,6 +31,7 @@
         "no-shadow": "off",
         "indent": "off",
         "no-empty": "warn",
+        "no-redeclare": "off",
         "consistent-return": "warn",
         "no-unused-vars": "off",
         "no-param-reassign": "warn",
@@ -71,7 +72,7 @@
             }
         ],
         "import/prefer-default-export": "off",
-        "import/no-extraneous-dependencies": [ "error", {"devDependencies": [ "**/*.spec.ts", "**/*.spec.tsx", "webpack.config.js" ]}],
+        "import/no-extraneous-dependencies": [ "error", {"devDependencies": [ "**/*.test.ts", "**/*.test.tsx", "**/__tests__/**/*", "vitest.config.ts" ]}],
         "import/extensions": ["error", "ignorePackages", { "js": "never", "jsx": "never", "ts": "never", "tsx": "never" }],
         "react/jsx-filename-extension": [2, { "extensions": [".jsx", ".tsx"] }],
         "react/require-default-props": "off",
